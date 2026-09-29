@@ -1,52 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
  
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
  
 <title>Iveco Market Share Dashboard</title>
  
-<script src="httpsvr.net/npm/chart.jsscript>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5e.min.jsscript>
+https://cdn.jsdelivr.net/npm/chart.jsscript>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/pjsscript>
  
 <style>
- 
-body{
-font-family:Arial;
-margin:20px;
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+background: #f5f5f5;
 }
  
-.card{
-display:inline-block;
-width:220px;
-padding:15px;
-margin:10px;
-background:#efefef;
-border-radius:8px;
+h1 {
+color: #003b7a;
 }
  
+.cards {
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+}
+ 
+.card {
+background: white;
+padding: 20px;
+border-radius: 10px;
+min-width: 220px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+ 
+.kpi {
+font-size: 28px;
+font-weight: bold;
+color: #003b7a;
+}
+ 
+canvas {
+margin-top: 30px;
+background: white;
+padding: 20px;
+border-radius: 10px;
+}
 </style>
- 
 </head>
  
 <body>
  
 <h1>Iveco Market Share Dashboard</h1>
  
+<div class="cards">
+ 
 <div class="card">
 <h3>TIV YTD</h3>
-<p id="tiv"></p>
+<div id="tiv" class="kpi">-</div>
 </div>
  
 <div class="card">
-<h3>Market Share Iveco</h3>
-<p id="ms"></p>
+<h3>IVECO Volume</h3>
+<div id="iveco" class="kpi">-</div>
+</div>
+ 
+<div class="card">
+<h3>Market Share</h3>
+<div id="ms" class="kpi">-</div>
+</div>
+ 
 </div>
  
 <canvas id="brandChart"></canvas>
  
-app.jsscript>
- 
-</body>
+<script src="app.js">>
  
 </html>

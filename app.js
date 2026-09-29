@@ -1,66 +1,59 @@
-Papa.parse("data/immatricolato.csv",{
+Papa.parse("data/immatricolato.csv", {
+download: true,
+header: true,
  
-download:true,
-header:true,
+complete: function(results) {
  
-complete:function(results){
+const data = results.data;
  
-let data=results.data;
+document.getElementById("tiv").innerHTML = data.length;
  
-const currentYear=new Date().getFullYear();
-const currentMonth=new Date().getMonth();
- 
-const ytd=data.filter(r=>{
- 
-const d=new Date(r["Tape Date"]);
- 
-return d.getFullYear()===currentYear &&
-d.getMonth()<=currentMonth;
- 
-});
- 
-document.getElementById("tiv").innerHTML=ytd.length;
- 
-const iveco=ytd.filter(
-r=>r["Make Central B"]==="IVECO"
-).length;
- 
-const ms=(iveco/ytd.length)*100;
- 
-document.getElementById("ms").innerHTML=
-ms.toFixed(2)+"%";
- 
-const makeCounts={};
- 
-ytd.forEach(r=>{
- 
-const make=r["Make Central B"];
- 
-if(!makeCounts[make])
-makeCounts[make]=0;
- 
-makeCounts[make]++;
- 
-});
- 
-new Chart(
- 
-document.getElementById('brandChart'),
- 
-{
-type:'bar',
- 
-data:{
-labels:Object.keys(makeCounts),
-datasets:[{
-label:'Volume',
-data:Object.values(makeCounts)
-}]
-}
-}
- 
+const ivecoRows = data.filter(
+r => r["Make Central B"] === "IVECO"
 );
  
+document.getElementById("iveco").innerHTML = ivecoRows.length;
+ 
+const ms = (ivecoRows.length / data.length) * 100;
+ 
+document.getElementById("ms").innerHTML =
+ms.toFixed(2) + "%";
+ 
+const brandCounts = {};
+ 
+data.forEach(row => {
+ 
+const brand = row["Make Central B"];
+ 
+if (!brand) return;
+ 
+if (!brandCounts[brand]) {
+brandCounts[brand] = 0;
 }
  
+brandCounts[brand]++;
+});
+ 
+const labels = Object.keys(brandCounts);
+const values = Object.values(brandCounts);
+ 
+new Chart(
+document.getElementById("brandChart"),
+{
+type: "bar",
+ 
+data: {
+labels: labels,
+datasets: [{
+label: "Immatricolazioni",
+data: values
+}]
+},
+ 
+options: {
+responsive: true
+}
+}
+);
+}
 });

@@ -5,76 +5,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  
-<title>Iveco Market Share Dashboard</title>
+<title>Quote Ufficiali Iveco</title>
  
+<script src="https://cdn.jsdelivr.net/npm/p1/papaparse.min.jsscript>
 https://cdn.jsdelivr.net/npm/chart.jsscript>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/pjsscript>
  
 <style>
-body {
-font-family: Arial, sans-serif;
-margin: 20px;
-background: #f5f5f5;
+ 
+body{
+font-family:Arial;
+background:#f3f5f7;
+margin:20px;
 }
  
-h1 {
-color: #003b7a;
+.cards{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
 }
  
-.cards {
-display: flex;
-gap: 20px;
-flex-wrap: wrap;
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 5px rgba(0,0,0,.15);
+min-width:220px;
 }
  
-.card {
-background: white;
-padding: 20px;
-border-radius: 10px;
-min-width: 220px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+.value{
+font-size:30px;
+font-weight:bold;
+color:#004990;
 }
  
-.kpi {
-font-size: 28px;
-font-weight: bold;
-color: #003b7a;
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+background:white;
 }
  
-canvas {
-margin-top: 30px;
-background: white;
-padding: 20px;
-border-radius: 10px;
+th,td{
+padding:8px;
+border:1px solid #ddd;
+text-align:center;
 }
+ 
 </style>
+ 
 </head>
  
 <body>
  
-<h1>Iveco Market Share Dashboard</h1>
+<h1>Quote Iveco YTD</h1>
  
 <div class="cards">
  
 <div class="card">
-<h3>TIV YTD</h3>
-<div id="tiv" class="kpi">-</div>
+<h3>TIV CY</h3>
+<div id="tivCY" class="value"></div>
 </div>
  
 <div class="card">
-<h3>IVECO Volume</h3>
-<div id="iveco" class="kpi">-</div>
+<h3>TIV PY</h3>
+<div id="tivPY" class="value"></div>
 </div>
  
 <div class="card">
-<h3>Market Share</h3>
-<div id="ms" class="kpi">-</div>
+<h3>MS CY</h3>
+<div id="msCY" class="value"></div>
+</div>
+ 
+<div class="card">
+<h3>MS PY</h3>
+<div id="msPY" class="value"></div>
+</div>
+ 
+<div class="card">
+<h3>Δ MS</h3>
+<div id="deltaMS" class="value"></div>
 </div>
  
 </div>
  
 <canvas id="brandChart"></canvas>
  
-<script src="app.js">>
+<h2>District</h2>
  
+<table id="districtTable">
+<thead>
+<tr>
+<th>District</th>
+<th>TIV CY</th>
+<th>TIV PY</th>
+<th>Δ TIV</th>
+<th>MS CY</th>
+<th>MS PY</th>
+<th>Δ MS</th>
+</tr>
+</thead>
+ 
+<tbody></tbody>
+ 
+</table>
+ 
+<script srct>
+ 
+</body>
 </html>

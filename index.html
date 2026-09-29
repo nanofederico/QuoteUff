@@ -3,113 +3,85 @@
  
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quote Iveco</title>
  
-<title>Quote Ufficiali Iveco</title>
- 
-<script src="https://cdn.jsdelivr.net/npm/p1/papaparse.min.jsscript>
-https://cdn.jsdelivr.net/npm/chart.jsscript>
- 
-<style>
- 
-body{
-font-family:Arial;
-background:#f3f5f7;
-margin:20px;
-}
- 
-.cards{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
- 
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,.15);
-min-width:220px;
-}
- 
-.value{
-font-size:30px;
-font-weight:bold;
-color:#004990;
-}
- 
-table{
-width:100%;
-margin-top:20px;
-border-collapse:collapse;
-background:white;
-}
- 
-th,td{
-padding:8px;
-border:1px solid #ddd;
-text-align:center;
-}
- 
-</style>
- 
+<script/cdn.jsdelivr.net/npm/chart.jsscript>
+<script src="https://cdn.jsdelivr.net/npm/.1/papaparse.min.jsscript>
 </head>
  
 <body>
  
-<h1>Quote Iveco YTD</h1>
+<h1>Dashboard Quote Iveco</h1>
  
-<div class="cards">
+<h2>TIV Totale</h2>
+<div id="tivCY">Caricamento...</div>
  
-<div class="card">
-<h3>TIV CY</h3>
-<div id="tivCY" class="value"></div>
-</div>
- 
-<div class="card">
-<h3>TIV PY</h3>
-<div id="tivPY" class="value"></div>
-</div>
- 
-<div class="card">
-<h3>MS CY</h3>
-<div id="msCY" class="value"></div>
-</div>
- 
-<div class="card">
-<h3>MS PY</h3>
-<div id="msPY" class="value"></div>
-</div>
- 
-<div class="card">
-<h3>Δ MS</h3>
-<div id="deltaMS" class="value"></div>
-</div>
- 
-</div>
+<h2>Market Share Iveco</h2>
+<div id="msCY">Caricamento...</div>
  
 <canvas id="brandChart"></canvas>
  
-<h2>District</h2>
- 
-<table id="districtTable">
-<thead>
-<tr>
-<th>District</th>
-<th>TIV CY</th>
-<th>TIV PY</th>
-<th>Δ TIV</th>
-<th>MS CY</th>
-<th>MS PY</th>
-<th>Δ MS</th>
-</tr>
-</thead>
- 
-<tbody></tbody>
- 
-</table>
- 
-<script srct>
+app.jsscript>
  
 </body>
+ 
 </html>
+Mostra più linee
+
+Poi sostituisci completamente app.js con:
+
+JavaScript
+Papa.parse("IMMATRICOLATO.csv", {
+download: true,
+header: true,
+skipEmptyLines: true,
+ 
+complete: function(results) {
+ 
+console.log(results.data);
+ 
+const data = results.data;
+ 
+document.getElementById("tivCY").innerHTML =
+data.length;
+ 
+const iveco =
+data.filter(
+x => x["Make Central b"] === "IVECO"
+).length;
+ 
+const ms =
+(iveco / data.length) * 100;
+ 
+document.getElementById("msCY").innerHTML =
+ms.toFixed(2) + "%";
+ 
+const counts = {};
+ 
+data.forEach(r => {
+ 
+const make = r["Make Central b"];
+ 
+if (!make) return;
+ 
+counts[make] =
+(counts[make] || 0) + 1;
+ 
+});
+ 
+new Chart(
+document.getElementById("brandChart"),
+{
+type: "bar",
+data: {
+labels: Object.keys(counts),
+datasets: [{
+label: "Immatricolazioni",
+data: Object.values(counts)
+}]
+}
+}
+);
+ 
+}
+});

@@ -1,5 +1,4 @@
 Papa.parse("IMMATRICOLATO.csv", {
- 
 download: true,
 header: true,
 skipEmptyLines: true,
@@ -11,41 +10,35 @@ const data = results.data;
 document.getElementById("totale").innerHTML =
 "<h2>Record caricati: " + data.length + "</h2>";
  
-const colonne = Object.keys(data[0]);
+if(data.length === 0){
+return;
+}
  
-const thead = document.querySelector("#tabella thead");
-const tbody = document.querySelector("#tabella tbody");
+const colonne = Object.keys(data[0]);
  
 let headerHtml = "<tr>";
  
-colonne.forEach(c => {
-headerHtml += "<th>" + c + "</th>";
+colonne.forEach(col => {
+headerHtml += "<th>" + col + "</th>";
 });
  
 headerHtml += "</tr>";
  
-thead.innerHTML = headerHtml;
+document.querySelector("#tabella thead").innerHTML = headerHtml;
  
-let righe = "";
+let bodyHtml = "";
  
-data.slice(0,20).forEach(r => {
+data.slice(0,20).forEach(riga => {
  
-righe += "<tr>";
+bodyHtml += "<tr>";
  
-colonne.forEach(c => {
-righe += "<td>" + (r[c] || "") + "</td>";
+colonne.forEach(col => {
+bodyHtml += "<td>" + (riga[col] || "") + "</td>";
 });
  
-righe += "</tr>";
- 
+bodyHtml += "</tr>";
 });
  
-tbody.innerHTML = righe;
- 
-},
- 
-error: function(err){
-alert("Errore CSV: " + err);
+document.querySelector("#tabella tbody").innerHTML = bodyHtml;
 }
- 
 });
